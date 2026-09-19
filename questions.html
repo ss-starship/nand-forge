@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NAND Forge — Playtester Questions</title>
+  <title>NAND Forge — Playtester Quiz</title>
   <style>
     body {
       font-family: system-ui, sans-serif;
-      max-width: 680px;
+      max-width: 720px;
       margin: 40px auto;
       padding: 0 20px;
       line-height: 1.6;
@@ -15,38 +15,96 @@
     }
     h1 { font-size: 24px; }
     .note { color: #555; font-size: 15px; margin-bottom: 32px; }
-    .q { margin-bottom: 28px; }
+    .q { margin-bottom: 26px; }
     .q-text { font-weight: 600; margin-bottom: 8px; }
     .opt { margin: 4px 0 4px 18px; }
+    code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; }
   </style>
 </head>
 <body>
-  <h1>NAND Forge — Playtester Questions</h1>
+  <h1>NAND Forge — Playtester Quiz</h1>
   <p class="note">Answer these once <strong>before</strong> playing and again
-  <strong>after</strong>. Pick the single best answer for each.</p>
+  <strong>after</strong>. Pick the single best answer for each. Every question
+  is about building logic gates out of other gates — the skill the game trains.</p>
 
   <div class="q">
-    <div class="q-text">1. Using only NAND gates, what is the minimum needed to build a NOT gate, and how?</div>
-    <div class="opt">A) Impossible with NAND alone</div>
-    <div class="opt">B) One NAND, feeding input A into both of its inputs</div>
-    <div class="opt">C) Two NANDs in series</div>
-    <div class="opt">D) One NAND with the second input tied to 0</div>
+    <div class="q-text">1. You wire a single NAND with the same signal into both inputs: <code>g0 = NAND(A, A)</code>. What does <code>g0</code> output?</div>
+    <div class="opt">A) Always 0</div>
+    <div class="opt">B) NOT A</div>
+    <div class="opt">C) A (unchanged)</div>
+    <div class="opt">D) Always 1</div>
   </div>
 
   <div class="q">
-    <div class="q-text">2. Why is NAND called a "universal" gate?</div>
-    <div class="opt">A) It's the fastest gate in CMOS</div>
-    <div class="opt">B) Every other logic gate can be built from NANDs alone</div>
-    <div class="opt">C) It uses the fewest transistors</div>
-    <div class="opt">D) It appears in every circuit</div>
+    <div class="q-text">2. You already have <code>g0 = NAND(A, B)</code>. Which single added gate turns this into an AND of A and B?</div>
+    <div class="opt">A) <code>NAND(g0, g0)</code></div>
+    <div class="opt">B) <code>OR(g0, g0)</code></div>
+    <div class="opt">C) <code>NAND(A, B)</code> again</div>
+    <div class="opt">D) <code>NAND(A, g0)</code></div>
   </div>
 
   <div class="q">
-    <div class="q-text">3. You're handed a truth table that outputs 1 only when the two inputs differ, with no gate name given. What's the most reliable first move?</div>
-    <div class="opt">A) Add gates and cycle inputs until the output column matches</div>
-    <div class="opt">B) Recognize the pattern as XOR, then recall/derive its NAND decomposition</div>
-    <div class="opt">C) Try random wirings and keep whichever gets closest</div>
-    <div class="opt">D) Start from the output signal and guess backward</div>
+    <div class="q-text">3. Building each of these from NAND gates only, which one costs the MOST NAND gates?</div>
+    <div class="opt">A) NOT</div>
+    <div class="opt">B) AND</div>
+    <div class="opt">C) OR</div>
+    <div class="opt">D) XOR</div>
+  </div>
+
+  <div class="q">
+    <div class="q-text">4. A student wants OR and wires <code>g0 = NAND(A, A)</code>, <code>g1 = NAND(B, B)</code>, then <code>g2 = AND(g0, g1)</code> as the output. What did they actually build?</div>
+    <div class="opt">A) NOR</div>
+    <div class="opt">B) OR (it's correct)</div>
+    <div class="opt">C) XOR</div>
+    <div class="opt">D) AND</div>
+  </div>
+
+  <div class="q">
+    <div class="q-text">5. In the 4-NAND XOR (<code>g0=NAND(A,B)</code>, <code>g1=NAND(A,g0)</code>, <code>g2=NAND(B,g0)</code>, <code>g3=NAND(g1,g2)</code>), what does the output <code>g3</code> produce when A=1 and B=1?</div>
+    <div class="opt">A) 0</div>
+    <div class="opt">B) 1</div>
+    <div class="opt">C) It depends on a hidden gate</div>
+    <div class="opt">D) Undefined</div>
+  </div>
+
+  <div class="q">
+    <div class="q-text">6. That same XOR construction reuses one gate's output by feeding it into two later gates. Which signal is reused that way?</div>
+    <div class="opt">A) The final output g3</div>
+    <div class="opt">B) g0 = NAND(A, B)</div>
+    <div class="opt">C) The raw input A</div>
+    <div class="opt">D) Nothing is reused</div>
+  </div>
+
+  <div class="q">
+    <div class="q-text">7. You solve a mystery truth table with 6 gates, then the "reveal minimal" shows a 4-gate version. What does that tell you about your solution?</div>
+    <div class="opt">A) Your solution produces the wrong output</div>
+    <div class="opt">B) Your solution is correct but not minimal</div>
+    <div class="opt">C) The 4-gate version must be wrong</div>
+    <div class="opt">D) 6 gates and 4 gates always behave differently</div>
+  </div>
+
+  <div class="q">
+    <div class="q-text">8. You're given a 2-input truth table (no gate name) that outputs 1 only for inputs <code>01</code> and <code>10</code>, and 0 for <code>00</code> and <code>11</code>. Which gate is this?</div>
+    <div class="opt">A) AND</div>
+    <div class="opt">B) OR</div>
+    <div class="opt">C) XOR</div>
+    <div class="opt">D) NAND</div>
+  </div>
+
+  <div class="q">
+    <div class="q-text">9. Trying to build NOT, a student ties the second NAND input to a constant 0: <code>NAND(A, 0)</code>. What does this circuit output?</div>
+    <div class="opt">A) NOT A</div>
+    <div class="opt">B) Always 1</div>
+    <div class="opt">C) Always 0</div>
+    <div class="opt">D) A (unchanged)</div>
+  </div>
+
+  <div class="q">
+    <div class="q-text">10. Using NAND gates only, what is the minimum number needed to build NOR of two inputs?</div>
+    <div class="opt">A) 2</div>
+    <div class="opt">B) 3</div>
+    <div class="opt">C) 4</div>
+    <div class="opt">D) 5</div>
   </div>
 </body>
 </html>
