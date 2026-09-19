@@ -131,8 +131,12 @@ export default class MainScene extends Phaser.Scene {
     // ---- header ----
     this.txt(20, 12, `Puzzle ${this.puzzleIndex + 1}/${SCENARIOS.length}:  ${s.title}`, { size: "20px", color: "#7cf6d0" });
     this.txt(20, 42, s.blurb, { size: "13px", color: "#9aa0a8", wrap: 500 });
-    const budgetColor = this.gates.length > s.budget ? "#ff6b6b" : "#e6e6e6";
-    this.txt(20, 84, `Gates used: ${this.gates.length} / ${s.budget}` + (s.exact ? "  (must be exact)" : "  (max)"), { color: budgetColor });
+    if (s.exact) {
+      const budgetColor = this.gates.length > s.budget ? "#ff6b6b" : "#e6e6e6";
+      this.txt(20, 84, `Gates used: ${this.gates.length} / ${s.budget}  (must be exact)`, { color: budgetColor });
+    } else {
+      this.txt(20, 84, `Gates used: ${this.gates.length}  (solve it any way you like — a minimal version exists)`, { color: "#e6e6e6" });
+    }
 
     // ---- target truth table (right column) ----
     this.renderTruthTable();
@@ -363,7 +367,7 @@ export default class MainScene extends Phaser.Scene {
       this.render();
       return;
     }
-    if (this.gates.length > s.budget) {
+    if (s.exact && this.gates.length > s.budget) {
       this.message = `Over budget: ${this.gates.length} gates, max ${s.budget}.`;
       this.messageColor = "#ff6b6b";
       this.render();
