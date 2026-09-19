@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NAND Forge — Playtester Questions</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 680px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.6;
+      color: #1a1a1a;
+    }
+    h1 { font-size: 24px; }
+    .note { color: #555; font-size: 15px; margin-bottom: 32px; }
+    .q { margin-bottom: 28px; }
+    .q-text { font-weight: 600; margin-bottom: 8px; }
+    .opt { margin: 4px 0 4px 18px; }
+  </style>
+</head>
+<body>
+  <h1>NAND Forge — Playtester Questions</h1>
+  <p class="note">Answer these once <strong>before</strong> playing and again
+  <strong>after</strong>. Pick the single best answer for each.</p>
+
+  <div class="q">
+    <div class="q-text">1. Using only NAND gates, what is the minimum needed to build a NOT gate, and how?</div>
+    <div class="opt">A) Impossible with NAND alone</div>
+    <div class="opt">B) One NAND, feeding input A into both of its inputs</div>
+    <div class="opt">C) Two NANDs in series</div>
+    <div class="opt">D) One NAND with the second input tied to 0</div>
+  </div>
+
+  <div class="q">
+    <div class="q-text">2. Why is NAND called a "universal" gate?</div>
+    <div class="opt">A) It's the fastest gate in CMOS</div>
+    <div class="opt">B) Every other logic gate can be built from NANDs alone</div>
+    <div class="opt">C) It uses the fewest transistors</div>
+    <div class="opt">D) It appears in every circuit</div>
+  </div>
+
+  <div class="q">
+    <div class="q-text">3. You're handed a truth table that outputs 1 only when the two inputs differ, with no gate name given. What's the most reliable first move?</div>
+    <div class="opt">A) Add gates and cycle inputs until the output column matches</div>
+    <div class="opt">B) Recognize the pattern as XOR, then recall/derive its NAND decomposition</div>
+    <div class="opt">C) Try random wirings and keep whichever gets closest</div>
+    <div class="opt">D) Start from the output signal and guess backward</div>
+  </div>
+</body>
+</html>
